@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.briarproject.briar.android.view.BriarRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/emergency"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="org.briarproject.briar.android.view.BriarRecyclerViewBehavior">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:text="EMERGENCY:"
+                android:textColor="#FF0000"
+                android:textSize="50dp" />
+
+            <TextView
+                android:id="@+id/countdown_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/emergency_stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_stop"
+            android:background="@android:color/transparent"
+            android:layout_gravity="bottom|center_horizontal"
+            android:paddingBottom="10dp"
+            android:visibility="invisible"/>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:layout_height="@android:dimen/thumbnail_height"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_switch_on"/>
+
+            <ImageView
+                android:id="@+id/countdown_emergency_button"
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:layout_height="@android:dimen/thumbnail_height"
+                android:src="@mipmap/ic_switch_off"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cancel_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#C0000000"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal|bottom">
+
+                <Button
+                    android:id="@+id/emergency_stop_stop"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="Stop Notifying Emergency Contacts"/>
+
+                <Button
+                    android:id="@+id/emergency_stop_cancel"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+        
+    </org.briarproject.briar.android.view.BriarRecyclerView>
+
+</android.support.design.widget.CoordinatorLayout>
