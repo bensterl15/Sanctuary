@@ -108,6 +108,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.WARNING;
 import static org.briarproject.briar.android.activity.RequestCodes.REQUEST_INTRODUCTION;
+import static org.briarproject.briar.android.contact.ConversationActivity.CONTACT_ID;
 import static org.briarproject.briar.android.settings.SettingsFragment.SETTINGS_NAMESPACE;
 import static org.briarproject.briar.android.util.UiUtils.getAvatarTransitionName;
 import static org.briarproject.briar.android.util.UiUtils.getBulbTransitionName;
@@ -167,10 +168,6 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
     @Inject
     AndroidNotificationManager notificationManager;
 
-    @Inject
-    @CryptoExecutor
-    Executor cryptoExecutor;
-
     //@Inject
     //volatile ForumSharingManager forumSharingManager;
 
@@ -191,9 +188,12 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
 
         Log.e("ughugh","ughugh");
 
-        ConversationActivity dumbassActivity = new ConversationActivity();
-        dumbassActivity.contactId = new ContactId(1);
-        dumbassActivity.onSendClick("Hello world!");
+        Intent i = new Intent(getActivity(),
+                ConversationActivity.class);
+//        ContactId contactId = item.getContact().getId();
+        i.putExtra(CONTACT_ID, 1);
+        i.putExtra("something", true);
+        startActivity(i);
 
         getActivity().setTitle(R.string.journey_button);
 
@@ -202,6 +202,7 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
                         false);
 
         return contentView;
+
     }
 /*
     private void loadGroupId(String body, long timestamp) {

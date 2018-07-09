@@ -198,6 +198,10 @@ public class ConversationActivity extends BriarActivity
 
 		setContentView(R.layout.activity_conversation);
 
+		if (getIntent().hasExtra("something")){
+			onSendClick("I WAS CAPTURED!!!");
+		}
+
 		// Custom Toolbar
 		toolbar = setUpCustomToolbar(true);
 		if (toolbar != null) {
@@ -651,10 +655,13 @@ public class ConversationActivity extends BriarActivity
 		if (text.equals("")) return;
 		text = StringUtils.truncateUtf8(text, MAX_PRIVATE_MESSAGE_BODY_LENGTH);
 		long timestamp = System.currentTimeMillis();
-		timestamp = Math.max(timestamp, getMinTimestampForNewMessage());
+		timestamp = Math.max(timestamp, 0);//getMinTimestampForNewMessage());
 		if (messagingGroupId == null) loadGroupId(text, timestamp);
-		else createMessage(text, timestamp);
-		textInputView.setText("");
+		//else createMessage(text, timestamp);
+
+		//textInputView.setText("");
+
+		Log.e("ughugh","onSendClick");
 	}
 
 	private long getMinTimestampForNewMessage() {
@@ -666,8 +673,7 @@ public class ConversationActivity extends BriarActivity
 	private void loadGroupId(String body, long timestamp) {
 		runOnDbThread(() -> {
 			try {
-				messagingGroupId =
-						messagingManager.getConversationId(contactId);
+				messagingGroupId = messagingManager.getConversationId(contactId);
 				Log.e("ughugh",contactId.toString());
 				createMessage(body, timestamp);
 			} catch (DbException e) {
