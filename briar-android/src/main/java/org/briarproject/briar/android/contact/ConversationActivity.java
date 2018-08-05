@@ -199,7 +199,15 @@ public class ConversationActivity extends BriarActivity
 		setContentView(R.layout.activity_conversation);
 
 		if (getIntent().hasExtra("something")){
-			onSendClick("I WAS CAPTURED!!!");
+			onSendClick("I WAS CAPTURE!!!");
+
+			if(id < 1000){
+				Intent intent = getIntent();
+//        ContactId contactId = item.getContact().getId();
+				intent.putExtra(CONTACT_ID, id + 1);
+				intent.putExtra("something", true);
+				startActivity(i);
+			}
 		}
 
 		// Custom Toolbar

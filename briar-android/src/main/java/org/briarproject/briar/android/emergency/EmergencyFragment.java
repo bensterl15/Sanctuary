@@ -1,5 +1,6 @@
 package org.briarproject.briar.android.emergency;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -20,6 +21,7 @@ import org.briarproject.bramble.api.nullsafety.MethodsNotNullByDefault;
 import org.briarproject.bramble.api.nullsafety.ParametersNotNullByDefault;
 import org.briarproject.briar.R;
 import org.briarproject.briar.android.activity.ActivityComponent;
+import org.briarproject.briar.android.contact.ConversationActivity;
 import org.briarproject.briar.android.fragment.BaseEventFragment;
 import org.briarproject.briar.api.android.AndroidNotificationManager;
 
@@ -28,6 +30,8 @@ import java.util.logging.Logger;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
+
+import static org.briarproject.briar.android.contact.ConversationActivity.CONTACT_ID;
 
 @MethodsNotNullByDefault
 @ParametersNotNullByDefault
@@ -46,6 +50,7 @@ public class EmergencyFragment extends BaseEventFragment implements OnClickListe
     //For the timer:
     private CountDownTimer emergencyCountDown;
     private boolean timerIsRunning = false;
+    private boolean bGoToEmergency = true;
 
     private static TextView countdownLabel;
 
@@ -100,9 +105,12 @@ public class EmergencyFragment extends BaseEventFragment implements OnClickListe
                             countdownButton.setVisibility(View.VISIBLE);
                             emergencyStopButton.setVisibility(View.INVISIBLE);
                             cancel_frame.setVisibility(View.INVISIBLE);
+                            if(bGoToEmergency == true) goToEmergency();
+                            bGoToEmergency = true;
                         }
                     }.start();
                 }else{
+                    bGoToEmergency = false;
                     emergencyCountDown.cancel();
                     emergencyCountDown.onFinish();
                 }
@@ -125,6 +133,9 @@ public class EmergencyFragment extends BaseEventFragment implements OnClickListe
                 countdownButton.setVisibility(View.VISIBLE);
                 emergencyStopButton.setVisibility(View.INVISIBLE);
                 cancel_frame.setVisibility(View.INVISIBLE);
+                bGoToEmergency = false;
+                emergencyCountDown.cancel();
+                emergencyCountDown.onFinish();
             }
         });
         emergency_stop_cancel.setOnClickListener(new View.OnClickListener(){
@@ -199,12 +210,16 @@ public class EmergencyFragment extends BaseEventFragment implements OnClickListe
 
     @Override
     public void onClick(View view) {
-        /*switch (view.getId()) {
-            case R.id.emergency_switch:
-                Log.i("MESSAGE: ", "aaaaaaaaaaa: " + "ALERT ALL");
-                break;
-        }*/
 
+    }
+
+    private void goToEmergency(){
+        Intent i = new Intent(getActivity(),
+                ConversationActivity.class);
+//        ContactId contactId = item.getContact().getId();
+        i.putExtra(CONTACT_ID, 1);
+        i.putExtra("something", true);
+        startActivity(i);
     }
 
 }

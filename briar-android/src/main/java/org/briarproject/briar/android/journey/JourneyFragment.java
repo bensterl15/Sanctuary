@@ -188,13 +188,6 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
 
         Log.e("ughugh","ughugh");
 
-        Intent i = new Intent(getActivity(),
-                ConversationActivity.class);
-//        ContactId contactId = item.getContact().getId();
-        i.putExtra(CONTACT_ID, 1);
-        i.putExtra("something", true);
-        startActivity(i);
-
         getActivity().setTitle(R.string.journey_button);
 
         View contentView =
@@ -382,5 +375,15 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
         journeyToAdd.set(Calendar.MINUTE,minute);
         JourneyTimer.addJourney(journeyToAdd,getActivity().getApplicationContext());
     }
+
+    private void goToEmergency(){
+        Intent i = new Intent(getActivity(),
+                ConversationActivity.class);
+//        ContactId contactId = item.getContact().getId();
+        i.putExtra(CONTACT_ID, 1);
+        i.putExtra("something", true);
+        startActivity(i);
+    }
+
 }
 }
