@@ -1,8 +1,13 @@
 package org.briarproject.briar.android.journey;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.UiThread;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -15,7 +20,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,6 +109,7 @@ import im.delight.android.identicons.IdenticonDrawable;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener;
 
+import static android.content.Context.JOB_SCHEDULER_SERVICE;
 import static android.support.v4.view.ViewCompat.setTransitionName;
 import static android.support.v7.util.SortedList.INVALID_POSITION;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -159,6 +167,7 @@ import static java.util.logging.Level.WARNING;
 
 @MethodsNotNullByDefault
 @ParametersNotNullByDefault
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class JourneyFragment extends BaseEventFragment implements OnClickListener {
 
     public final static String TAG = JourneyFragment.class.getName();
@@ -180,13 +189,49 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
         return fragment;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+            Button ScheduleJourneyButton = (Button) this.getView().findViewById(R.id.ScheduleJourneyButton);
+            ScheduleJourneyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try{
+                        ComponentName componentName = new ComponentName(getActivity(), MyJobService.class);
+
+                        Spinner hourSpinner = (Spinner) getView().findViewById(R.id.HourSpinner);
+                        Spinner minuteSpinner = (Spinner) getView().findViewById(R.id.MinuteSpinner);
+
+                        //Get the number of minutes selected in the two slots:
+                        int emergencyDelay = hourSpinner.getSelectedItemPosition()*60 + minuteSpinner.getSelectedItemPosition();
+                        //We convert from minutes to milliSeconds
+                        emergencyDelay *= 60000;
+
+                        JobInfo jobInfo = new JobInfo.Builder(12, componentName)
+                                .setRequiresCharging(false)
+                                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                                .setMinimumLatency(emergencyDelay)
+                                .build();
+
+
+                        JobScheduler jobScheduler = (JobScheduler) getActivity().getSystemService(JOB_SCHEDULER_SERVICE);
+                        int resultCode = jobScheduler.schedule(jobInfo);
+                        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+                            Log.e("UGH", "Job scheduled!");
+                        } else {
+                            Log.e("UGH", "Job not scheduled");
+                        }
+                    }catch (Exception e){
+                        Log.e("UGH",e.getLocalizedMessage());
+                    }
+                }});
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        Log.e("ughugh","ughugh");
 
         getActivity().setTitle(R.string.journey_button);
 
@@ -323,11 +368,6 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
     @Override
     public void onSaveInstanceState(Bundle saveInstanceState) {
         super.onSaveInstanceState(saveInstanceState);
-        saveDates();
-    }
-
-    private void saveDates() {
-
     }
 
     public static class DatePickerFragment extends DialogFragment
@@ -376,14 +416,6 @@ public class JourneyFragment extends BaseEventFragment implements OnClickListene
         JourneyTimer.addJourney(journeyToAdd,getActivity().getApplicationContext());
     }
 
-    private void goToEmergency(){
-        Intent i = new Intent(getActivity(),
-                ConversationActivity.class);
-//        ContactId contactId = item.getContact().getId();
-        i.putExtra(CONTACT_ID, 1);
-        i.putExtra("something", true);
-        startActivity(i);
-    }
 
 }
 }

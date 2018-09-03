@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.briarproject.briar.android.view.BriarRecyclerView
+        android:id="@+id/home"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="org.briarproject.briar.android.view.BriarRecyclerViewBehavior">
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="@android:dimen/thumbnail_width"
+            android:layout_height="@android:dimen/thumbnail_height"
+            android:layout_gravity="center"/>
+            <!--android:src="@mipmap/ic_home" -->
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mary Dwyer"
+            android:layout_gravity="center"
+            android:textSize="18dp"/>
+
+        <ImageButton
+            android:id="@+id/messaging_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Network"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent" />
+            <!--android:src="@mipmap/ic_network"-->
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Friends"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/journey_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Journey"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"/>
+            <!--android:src="@mipmap/ic_journey"-->
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Journey"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/emergency_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"/>
+            <!--android:src="@mipmap/ic_emergency"-->
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency"
+            android:layout_gravity="center"/>
+        </LinearLayout>
+
+    </org.briarproject.briar.android.view.BriarRecyclerView>
+
+</android.support.design.widget.CoordinatorLayout>

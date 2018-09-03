@@ -3,8 +3,10 @@ package org.briarproject.briar.android.navdrawer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.FragmentTransaction;
@@ -35,6 +37,7 @@ import org.briarproject.briar.android.emergency.EmergencyFragment;
 import org.briarproject.briar.android.fragment.BaseFragment;
 import org.briarproject.briar.android.fragment.BaseFragment.BaseFragmentListener;
 import org.briarproject.briar.android.fragment.SignOutFragment;
+import org.briarproject.briar.android.home.HomeFragment;
 import org.briarproject.briar.android.journey.JourneyFragment;
 import org.briarproject.briar.android.navdrawer.NavDrawerController.ExpiryWarning;
 import org.briarproject.briar.android.privategroup.list.GroupListFragment;
@@ -57,6 +60,7 @@ import static org.briarproject.briar.android.navdrawer.NavDrawerController.Expir
 import static org.briarproject.briar.android.navdrawer.NavDrawerController.ExpiryWarning.UPDATE;
 import static org.briarproject.briar.android.util.UiUtils.getDaysUntilExpiry;
 
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class NavDrawerActivity extends BriarActivity implements
 		BaseFragmentListener, TransportStateListener,
 		OnNavigationItemSelectedListener {
@@ -178,6 +182,9 @@ public class NavDrawerActivity extends BriarActivity implements
 	private void loadFragment(int fragmentId) {
 		// TODO re-use fragments from the manager when possible (#606)
 		switch (fragmentId) {
+			case R.id.nav_btn_home:
+				startFragment(HomeFragment.newInstance());
+				break;
 			case R.id.nav_btn_contacts:
 				startFragment(ContactListFragment.newInstance());
 				break;

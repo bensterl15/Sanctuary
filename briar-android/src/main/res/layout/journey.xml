@@ -23,15 +23,30 @@
 				android:paddingBottom="20dp">
 
 				<Spinner
+					android:id="@+id/HourSpinner"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:entries="@array/hours"/>
 				<Spinner
+					android:id="@+id/MinuteSpinner"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:entries="@array/minutes"/>
 
 			</LinearLayout>
+
+			<Button
+				android:id="@+id/ScheduleJourneyButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Schedule Journey"/>
+
+			<Button
+				android:id="@+id/CancelJourneyButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Cancel Journey"/>
+
 		</LinearLayout>
 
 	</org.briarproject.briar.android.view.BriarRecyclerView>

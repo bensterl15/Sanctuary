@@ -24,6 +24,7 @@ import org.briarproject.briar.android.forum.ForumActivity;
 import org.briarproject.briar.android.forum.ForumListFragment;
 import org.briarproject.briar.android.forum.ForumModule;
 import org.briarproject.briar.android.fragment.ScreenFilterDialogFragment;
+import org.briarproject.briar.android.home.HomeFragment;
 import org.briarproject.briar.android.introduction.ContactChooserFragment;
 import org.briarproject.briar.android.introduction.IntroductionActivity;
 import org.briarproject.briar.android.introduction.IntroductionMessageFragment;
@@ -86,6 +87,8 @@ import dagger.Component;
 public interface ActivityComponent {
 
 	Activity activity();
+
+	void inject(HomeFragment activity);
 
 	void inject(SplashScreenActivity activity);
 

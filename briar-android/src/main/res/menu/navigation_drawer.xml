@@ -4,6 +4,10 @@
 
 	<group android:checkableBehavior="single">
 		<item
+			android:id="@+id/nav_btn_home"
+			android:icon="@drawable/ic_contacts"
+			android:title="Home"/>
+		<item
 			android:id="@+id/nav_btn_contacts"
 			android:icon="@drawable/ic_contacts"
 			android:title="@string/contact_list_button"/>

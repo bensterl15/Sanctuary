@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="artifacts:bramble-android">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/bramble-android-release.aar/f625f4ada1ccca09588dee6bc580e8bb/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/bramble-android-release.aar/f625f4ada1ccca09588dee6bc580e8bb/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/bramble-android-release.aar/f625f4ada1ccca09588dee6bc580e8bb/jars/libs/jtorctl-briar.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/bramble-android-release.aar/beff4913c3dd5e205ad7b74adff9287d/jars/libs/jtorctl-briar.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/bramble-android-release.aar/beff4913c3dd5e205ad7b74adff9287d/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/bramble-android-release.aar/beff4913c3dd5e205ad7b74adff9287d/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
